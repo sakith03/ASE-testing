@@ -24,11 +24,22 @@ class Cart {
     }
 
     total() {
-        return this.items.reduce(
-            (sum, item) => sum + item.product.price * item.quantity,
-            0
-        );
+    let total = this.items.reduce((sum, item) => {
+        let subtotal = item.product.price * item.quantity;
+
+        if (item.quantity >= 10) {
+            subtotal *= 0.9;
+        }
+
+        return sum + subtotal;
+    }, 0);
+
+    if (total >= 1000) {
+        total *= 0.95;
     }
+
+    return total;
+}
 }
 
 module.exports = { Cart };
